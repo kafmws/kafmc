@@ -3,12 +3,13 @@
 
 #include "pch.h"
 
-char *source_text;//all code after preprocess
-char *text_p;//current position
+char *source_text = NULL;//all code after preprocess
+char *text_p = NULL;//current position
 int source_line_number = 0;//source code line number;
 
 int main(int argc, char *argv[]){
 	preprocess(argv[2]);
+	lexer();
 	printf("hello world");
 	return 0;
 }

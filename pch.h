@@ -18,6 +18,4 @@
 //#ifndef win32
 //
 //#endif // !win32
-#include"kafmc.h"
-#include"lexer.h"
 #endif //PCH_H
