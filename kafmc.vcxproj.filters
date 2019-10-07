@@ -24,6 +24,12 @@
     <ClInclude Include="lexer.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="parser.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="preprocessor.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.c">
@@ -33,6 +39,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="lexer.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="preprocessor.c">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

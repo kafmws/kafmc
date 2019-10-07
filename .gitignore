@@ -333,3 +333,6 @@ ASALocalRun/
 # Local History for Visual Studio
 .localhistory/
 testc.c
+*.s
+testc.c
+testc.c
