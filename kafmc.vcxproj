@@ -153,13 +153,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="hash_table.h" />
     <ClInclude Include="kafmc.h" />
     <ClInclude Include="lexer.h" />
     <ClInclude Include="parser.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="preprocessor.h" />
+    <ClInclude Include="symbol_list.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="hash_table.c" />
     <ClCompile Include="kafmc.c" />
     <ClCompile Include="lexer.c" />
     <ClCompile Include="pch.c">

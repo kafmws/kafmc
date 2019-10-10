@@ -248,8 +248,8 @@ void lexer() {
         else if (*text_p == ';') { text_p++; printf("( ;, ; )"); }
         else if (*text_p == '\n' || *text_p == '\r') { text_p++; source_line_number++; }
         else {
-            if (*text_p != ' ')printf("%d lines %d column [Error] unknown character", source_line_number, text_p - text_pre);
-            else { text_p++; }
+            if (*text_p != ' ')printf("\n%d lines %d column [Error] unknown character %c\n", source_line_number, text_p);
+            text_p++;
         }
         //sizeof will return as identifier
     }

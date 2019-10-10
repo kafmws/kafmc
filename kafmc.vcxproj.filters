@@ -21,13 +21,19 @@
     <ClInclude Include="kafmc.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="lexer.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="parser.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="preprocessor.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="symbol_list.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="lexer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="hash_table.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -42,6 +48,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="preprocessor.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="hash_table.c">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

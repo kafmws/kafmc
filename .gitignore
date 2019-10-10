@@ -334,5 +334,4 @@ ASALocalRun/
 .localhistory/
 testc.c
 *.s
-testc.c
-testc.c
+*.exe
