@@ -53,5 +53,8 @@
     <ClCompile Include="hash_table.c">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="symbol_list.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

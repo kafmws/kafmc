@@ -1,6 +1,4 @@
 #include"pch.h"
-#include"lexer.h"
-#include"kafmc.h"
 
 //是否需要token类型？
 int token;//token
@@ -75,6 +73,15 @@ static inline char *token_string(TOKEN num) {
 }
 #undef to_token_string
 
+static inline int token_name_to_token_num(char *token) {
+    for (int i = 0; i < ANSI_C_KEYWORDS_NUM; i++) {
+        if (strncmp(token, ANSI_C_KEYWORDS_LIST[i], ANSI_C_KEYWORDS_LEN_LIST[i]) == 0) {
+            return ANSI_C_KEYWORDS_NUM_LIST[i];
+        }
+    }
+    return 0;
+}
+
 void print(int tk_name, char *begin, char *end) {//[begin, end)
     printf(" (%s,", token_string(tk_name));
     while (begin < end)printf("%c", *begin++);
@@ -84,9 +91,10 @@ void print(int tk_name, char *begin, char *end) {//[begin, end)
 //--------------------------------------------------------------------------------------------
 
 void lexer() {
+    //static int column_number = 0;//column number 
     //text_p  current position
     while (*text_p) {
-        char *text_pre = text_p;//begin position
+        char *text_pre = text_p;//token begin position
         if (*text_p >= '0' && *text_p <= '9' || *text_p == '.') {//NUM(HEX, OCT, DEC)
             int value = 0;//vlaue of NUM
             if (*text_p == '0') {
@@ -208,6 +216,7 @@ void lexer() {
             //as for string, 
             do {
                 text_p++;
+                /*if (*text_p == '\n') { text_p--; break; }*/ //allow that '\n' appears in string constant
             } while (*text_p != '"');
             //(string, text_pre, text_p) [text_pre=='"', text_p=='"']
             text_p++;
@@ -219,7 +228,9 @@ void lexer() {
             } while (*text_p == '_' || *text_p == '$' || (*text_p >= 'a' && *text_p <= 'z')
                 || (*text_p >= 'A' && *text_p <= 'Z') || (*text_p >= '0' && *text_p <= '9'));
             //(token, text_pre, text_p-1) [text_pre, text_p-1]
-            print(IDENTIFIER, text_pre, text_p);
+            int token_num = token_name_to_token_num(text_pre);
+            if (token_num) printf("(%d, %s)", token_num, token_string(token_num));
+            else print(IDENTIFIER, text_pre, text_p);
             //already point to next character, should not text_p++;
         }
         else if (*text_p == '(') { text_p++; printf("( (, ( )"); }
@@ -232,7 +243,7 @@ void lexer() {
         else if (*text_p == '-') { text_p++; if (*text_p == '-') { text_p++; print(DEC_OP, text_pre, text_p); } else if (*text_p == '>') { text_p++; print(PTR_OP, text_pre, text_p); } else { printf("( -, - )"); } }
         else if (*text_p == '*') { text_p++; printf("( *, * )"); }
         else if (*text_p == '/') { text_p++; printf("( /, / )"); }
-        else if (*text_p == '%') { text_p++; printf("( %, % )"); }
+        else if (*text_p == '%') { text_p++; printf("( %%, %% )"); }
         else if (*text_p == '&') { text_p++; if (*text_p == '&') { text_p++; print(AND_OP, text_pre, text_p); } else { printf("( &, & )"); } }
         else if (*text_p == '|') { text_p++; if (*text_p == '|') { text_p++; print(OR_OP, text_pre, text_p); } else { printf("( |, | )"); } }
         else if (*text_p == '!') { text_p++; if (*text_p == '=') { text_p++; print(NE_OP, text_pre, text_p); } else { printf("( !, ! )"); } }
@@ -248,10 +259,10 @@ void lexer() {
         else if (*text_p == ';') { text_p++; printf("( ;, ; )"); }
         else if (*text_p == '\n' || *text_p == '\r') { text_p++; source_line_number++; }
         else {
-            if (*text_p != ' ')printf("\n%d lines %d column [Error] unknown character %c\n", source_line_number, text_p);
+            if (*text_p != ' ')printf("\n%d lines [Error] unknown character %c\n", source_line_number, *text_p);
             text_p++;
         }
-        //sizeof will return as identifier
+        //sizeof will return as keyword
     }
     printf("( EOF, EOF )");
 }

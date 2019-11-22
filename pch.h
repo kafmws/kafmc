@@ -12,10 +12,15 @@
 // TODO: 添加要在此处预编译的标头
 #include<stdio.h>
 #include<string.h>
+#include<ctype.h>
 #include<stdlib.h>
 #include<io.h>//open read etc.
 #include <sys/stat.h>//stat
-//#ifndef win32
-//
-//#endif // !win32
+
+//local
+#include"lexer.h"
+#include"kafmc.h"
+#include"hash_table.h"
+#include"symbol_list.h"
+#include"preprocessor.h"
 #endif

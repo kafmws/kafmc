@@ -5,7 +5,7 @@
 
 char *source_text = NULL;//all code after preprocess
 char *text_p = NULL;//current position
-int source_line_number = 0;//source code line number;
+int source_line_number = 1;//source code line number    using in preprocessor and lexer
 
 int main(int argc, char *argv[]) {
     preprocess(argv[2]);

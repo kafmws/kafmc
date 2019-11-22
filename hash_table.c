@@ -88,7 +88,7 @@ void *hash_table_get(hash_table *ht, char *key) {
     return NULL;
 }
 
-void *hash_table_remove(hash_table *ht, char *key) {
+void *hash_table_remove(hash_table *ht, char *key) {//free key
     int hash = hashcode(key);
     int h = hash & (ht->table_size - 1);
     kv *kv_list = ht->table[h];
@@ -111,4 +111,20 @@ void *hash_table_remove(hash_table *ht, char *key) {
         }
     }
     return NULL;
+}
+
+void hash_table_free(hash_table *ht) {
+    int cnt = ht->cnt, i = 0;
+    kv *del = NULL;
+    while (cnt) {
+        while (ht->table[i]) {
+            del = ht->table[i];
+            ht->table[i] = del->next;
+            free(del);
+            cnt--;
+        }
+        i++;
+    }
+    free(ht->table);
+    free(ht);
 }

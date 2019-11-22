@@ -335,3 +335,5 @@ ASALocalRun/
 testc.c
 *.s
 *.exe
+*.filters
+*.vcxproj
